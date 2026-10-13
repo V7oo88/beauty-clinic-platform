@@ -1,0 +1,271 @@
+// Prisma schema — Beauty Clinic Platform
+// SQLite — production-ready relational schema with proper PK/FK/Unique/Timestamps
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ====================== ENUMS ======================
+// SQLite doesn't enforce enums natively but Prisma generates union types.
+// We model them as String for compatibility and validate at app-layer.
+
+// ====================== AUTH / USERS ======================
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  name          String?
+  phone         String?
+  role          String   @default("CUSTOMER") // ADMIN | DOCTOR | CUSTOMER
+  image         String?
+  emailVerified DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  customer      Customer?
+  doctor        Doctor?
+  notifications Notification[]
+  reviews       Review[]
+  payments      Payment[]
+
+  @@index([role])
+}
+
+model Customer {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  firstName    String
+  lastName     String
+  phone        String
+  gender       String?
+  birthDate    DateTime?
+  address      String?
+  notes        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  appointments Appointment[]
+  payments     Payment[]
+  reviews       Review[]
+
+  @@index([phone])
+}
+
+model Doctor {
+  id            String   @id @default(cuid())
+  userId        String?  @unique // optional linked auth account
+  user          User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  name          String   @unique
+  nameEn        String
+  title         String
+  titleEn       String
+  specialty     String
+  specialtyEn   String
+  bio           String
+  bioEn         String
+  image         String
+  experienceYears Int
+  rating        Float    @default(5.0)
+  reviewCount   Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  services      DoctorService[]
+  schedules     Schedule[]
+  appointments  Appointment[]
+
+  @@index([specialty])
+}
+
+// ====================== SERVICES ======================
+model Service {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  name          String
+  nameEn        String
+  shortDesc     String
+  shortDescEn   String
+  fullDesc      String
+  fullDescEn    String
+  image         String
+  durationMin   Int      @default(60) // session duration minutes
+  price         Float
+  category      String?  // e.g. "Skin", "Body", "Face"
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  doctors       DoctorService[]
+  appointments  Appointment[]
+  faqs          ServiceFaq[]
+  gallery       GalleryItem[]
+
+  @@index([category])
+}
+
+model DoctorService {
+  id        String  @id @default(cuid())
+  doctorId  String
+  serviceId String
+  doctor    Doctor  @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@unique([doctorId, serviceId])
+  @@index([serviceId])
+}
+
+model ServiceFaq {
+  id        String  @id @default(cuid())
+  serviceId String
+  question  String
+  answer    String
+  questionEn String?
+  answerEn  String?
+  order     Int     @default(0)
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@index([serviceId])
+}
+
+// ====================== SCHEDULES ======================
+model Schedule {
+  id          String   @id @default(cuid())
+  doctorId    String
+  doctor      Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  dayOfWeek   Int      // 0=Sun ... 6=Sat
+  startTime   String   // "09:00"
+  endTime     String   // "17:00"
+  isWorking   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([doctorId, dayOfWeek])
+}
+
+// ====================== APPOINTMENTS ======================
+model Appointment {
+  id           String   @id @default(cuid())
+  bookingRef   String   @unique // human-friendly e.g. CLN-20261014-AB12
+  customerId   String
+  doctorId     String
+  serviceId    String
+  scheduleId   String?
+  date         DateTime // date of appointment (with time)
+  timeSlot     String   // "14:00"
+  status       String   @default("PENDING") // PENDING | CONFIRMED | CANCELLED | COMPLETED | NO_SHOW | AVAILABLE
+  notes        String?
+  cancelReason String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  customer     Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  doctor       Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  service      Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  payment      Payment?
+
+  @@unique([doctorId, date, timeSlot]) // prevent double-booking
+  @@index([customerId])
+  @@index([doctorId, date])
+  @@index([status])
+}
+
+// ====================== PAYMENTS ======================
+model Payment {
+  id            String   @id @default(cuid())
+  appointmentId String   @unique
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  customerId    String
+  customer      Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  userId        String?
+  user          User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  amount        Float
+  method        String   // CASH | CREDIT_CARD
+  status        String   @default("PENDING") // PENDING | PAID | REFUNDED | FAILED
+  txnRef        String?  // mock transaction reference
+  paidAt        DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([customerId])
+  @@index([status])
+}
+
+// ====================== NOTIFICATIONS ======================
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String   // BOOKING_CREATED | BOOKING_CONFIRMED | BOOKING_CANCELLED | REMINDER | PAYMENT_RECEIVED
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  data      String?  // JSON string with extra context
+  createdAt DateTime @default(now())
+
+  @@index([userId, isRead])
+}
+
+// ====================== REVIEWS ======================
+model Review {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  customerId  String?
+  customer    Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  doctorId    String?
+  serviceId   String?
+  rating      Int      // 1..5
+  comment     String
+  isApproved  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([doctorId])
+  @@index([serviceId])
+}
+
+// ====================== SETTINGS ======================
+model Setting {
+  id        String  @id @default(cuid())
+  key       String  @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+// ====================== BEFORE/AFTER GALLERY ======================
+model GalleryItem {
+  id          String  @id @default(cuid())
+  serviceId   String?
+  service     Service? @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  title       String
+  titleEn     String
+  beforeImage String
+  afterImage  String
+  description String?
+  descriptionEn String?
+  createdAt   DateTime @default(now())
+
+  @@index([serviceId])
+}
+
+// ====================== TESTIMONIALS ======================
+model Testimonial {
+  id        String  @id @default(cuid())
+  name      String
+  nameEn    String
+  role      String?
+  roleEn    String?
+  avatar    String?
+  rating    Int     @default(5)
+  comment   String
+  commentEn String?
+  isApproved Boolean @default(true)
+  createdAt DateTime @default(now())
+}

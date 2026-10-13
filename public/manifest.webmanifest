@@ -1,0 +1,64 @@
+{
+  "name": "عيادة الجمال — Beauty Clinic",
+  "short_name": "Beauty",
+  "description": "منصة عيادة تجميل فاخرة — حجز المواعيد والخدمات",
+  "start_url": "/ar",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F8F4EE",
+  "theme_color": "#5c4a3d",
+  "dir": "rtl",
+  "lang": "ar",
+  "categories": ["health", "medical", "beauty", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Book appointment",
+      "short_name": "Book",
+      "url": "/ar/booking"
+    },
+    {
+      "name": "Services",
+      "short_name": "Services",
+      "url": "/ar/services"
+    },
+    {
+      "name": "Doctors",
+      "short_name": "Doctors",
+      "url": "/ar/doctors"
+    }
+  ]
+}
