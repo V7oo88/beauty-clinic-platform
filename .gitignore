@@ -84,3 +84,12 @@ $RECYCLE.BIN/
 
 # Lock files we don't want in repo (optional — keeping bun.lock as it's small)
 package-lock.json.bak
+
+# Sandbox environment (not part of beauty clinic project)
+skills/
+examples/
+tests/python-runtime-build.sh
+tests/python-runtime-container.sh
+tests/database-runtime-build.sh
+tool-results/
+tmp/
