@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "ui-avatars.com" },
       { protocol: "https", hostname: "plus.unsplash.com" },
       { protocol: "https", hostname: "images.pexels.com" },
+      { protocol: "https", hostname: "z-cdn.chatglm.cn" },
     ],
   },
   async headers() {

@@ -32,9 +32,16 @@ export function DoctorCard({ doctor }: { doctor: Doctor }) {
         <div className="aspect-[4/5] overflow-hidden bg-brand-beige/40 relative">
           <img
             src={doctor.image}
-            alt={locale === "ar" ? doctor.name : doctor.nameEn}
+            alt={
+              locale === "ar"
+                ? `صورة ${doctor.name} — ${doctor.title}، ${doctor.specialty}`
+                : `Photo of ${doctor.nameEn} — ${doctor.titleEn}, ${doctor.specialtyEn}`
+            }
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = `https://picsum.photos/seed/doc-${doctor.id}/600/750`;
+            }}
           />
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-brand-plum/40 via-transparent to-transparent" />

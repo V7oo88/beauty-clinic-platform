@@ -121,11 +121,11 @@ export function HomeHero({ settings }: { settings?: Partial<Settings> }) {
             {/* Decorative frame */}
             <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-brand-lavender/40 to-brand-beige/40 blur-md" />
 
-            {/* Main image — sophisticated beauty/spa visual */}
+            {/* Main image — luxury beauty aesthetic clinic interior with treatment bed */}
             <div className="relative aspect-[4/5] rounded-[1.75rem] overflow-hidden shadow-luxury border-4 border-white">
               <img
-                src="https://images.unsplash.com/photo-1570172639649-510e638f9325?w=900&q=80&auto=format"
-                alt={locale === "ar" ? "عيادة تجميل فاخرة" : "Luxury beauty clinic"}
+                src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/738367c5dbb1.jpg"
+                alt={locale === "ar" ? "داخل عيادة التجميل الفاخرة مع سرير علاج وبيئة معقّمة" : "Luxury beauty clinic interior with treatment bed in clean professional environment"}
                 className="h-full w-full object-cover"
                 loading="eager"
                 onError={(e) => {

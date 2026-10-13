@@ -1,0 +1,33 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "professional woman receiving laser hair removal treatment on leg with handheld laser device in beauty clinic"
+✅ Got 3 images
+{
+  "success": true,
+  "query": "professional woman receiving laser hair removal treatment on leg with handheld laser device in beauty clinic",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5f1c9d17f392.jpg",
+      "caption": "",
+      "source": "Magnific",
+      "original_width": "720px",
+      "original_height": "1280px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4f7ec13d7eb8.jpg",
+      "caption": "",
+      "source": "Sev Skin",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/522a2834a1ce.jpg",
+      "caption": "",
+      "source": "DermRays",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    }
+  ]
+}

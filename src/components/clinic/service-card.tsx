@@ -31,9 +31,16 @@ export function ServiceCard({ service }: { service: Service }) {
         <div className="aspect-[4/3] overflow-hidden bg-brand-beige/40 relative">
           <img
             src={service.image}
-            alt={locale === "ar" ? service.name : service.nameEn}
+            alt={
+              locale === "ar"
+                ? `صورة توضّح إجراء ${service.name} — ${service.shortDesc}`
+                : `Image depicting ${service.nameEn} procedure — ${service.shortDescEn}`
+            }
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = `https://picsum.photos/seed/${service.slug}/1200/800`;
+            }}
           />
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-brand-plum/20 via-transparent to-transparent" />

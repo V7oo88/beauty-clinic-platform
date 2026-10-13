@@ -44,13 +44,31 @@ export function HomeGallery({ items }: { items: GalleryItem[] }) {
             >
               <div className="grid grid-cols-2 gap-1 bg-brand-plum/10">
                 <div className="aspect-[3/4] relative overflow-hidden">
-                  <img src={it.beforeImage} alt={`Before - ${it.title}`} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <img
+                    src={it.beforeImage}
+                    alt={
+                      locale === "ar"
+                        ? `${it.title} — حالة قبل العلاج`
+                        : `${it.titleEn} — before treatment`
+                    }
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
                   <span className="absolute top-3 start-3 px-3 py-1.5 text-caption font-bold uppercase tracking-widest bg-white/90 backdrop-blur-sm rounded-full border border-brand-border text-brand-secondary">
                     {locale === "ar" ? "قبل" : "Before"}
                   </span>
                 </div>
                 <div className="aspect-[3/4] relative overflow-hidden">
-                  <img src={it.afterImage} alt={`After - ${it.title}`} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <img
+                    src={it.afterImage}
+                    alt={
+                      locale === "ar"
+                        ? `${it.title} — النتيجة بعد العلاج`
+                        : `${it.titleEn} — after treatment`
+                    }
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
                   <span className="absolute top-3 start-3 px-3 py-1.5 text-caption font-bold uppercase tracking-widest bg-brand-purple text-white rounded-full shadow-purple">
                     {locale === "ar" ? "بعد" : "After"}
                   </span>

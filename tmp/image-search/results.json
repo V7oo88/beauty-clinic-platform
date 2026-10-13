@@ -1,0 +1,465 @@
+{
+  "laser": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d323c0c945f6.jpg",
+      "source": "SpaDerma",
+      "width": "1400px",
+      "height": "1440px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a04dcb5779bd.png",
+      "source": "TheBump.com",
+      "width": "1320px",
+      "height": "734px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f8b56a269d4f.jpg",
+      "source": "Glownar Aesthetics",
+      "width": "1946px",
+      "height": "1946px"
+    }
+  ],
+  "botox": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/da0f2063de9c.jpg",
+      "source": "Wisconsin Institute of Plastic Surgery",
+      "width": "1200px",
+      "height": "1450px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6514c19a4d9b.jpg",
+      "source": "American Academy of Cosmetic Medicine",
+      "width": "1200px",
+      "height": "855px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a68d8d5c3e83.jpg",
+      "source": "Alamy",
+      "width": "1300px",
+      "height": "821px"
+    }
+  ],
+  "fillers": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1384bda8fb19.jpg",
+      "source": "Radiance at Fluhme",
+      "width": "1024px",
+      "height": "1536px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/42480ca0a7c1.jpg",
+      "source": "Harley Academy",
+      "width": "1728px",
+      "height": "955px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/76ca42fdaf62.png",
+      "source": "Skin Type Solutions",
+      "width": "2240px",
+      "height": "1260px"
+    }
+  ],
+  "skin-boosters": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b4646e97c265.jpg",
+      "source": "Oblique",
+      "width": "1920px",
+      "height": "1280px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1da1880062dc.jpg",
+      "source": "The Tweakments Guide",
+      "width": "1080px",
+      "height": "1080px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f19c2aec22c1.jpg",
+      "source": "drkatyadizitzer.com",
+      "width": "1376px",
+      "height": "768px"
+    }
+  ],
+  "body-tightening": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/44f0029f5daf.jpg",
+      "source": "All About Me Medical Aesthetics",
+      "width": "1928px",
+      "height": "1134px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1702e8ce6429.jpg",
+      "source": "SL Aesthetic Clinic",
+      "width": "1920px",
+      "height": "1280px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4c676c3e79db.png",
+      "source": "Rejuva Fresh",
+      "width": "1080px",
+      "height": "1080px"
+    }
+  ],
+  "body-contouring": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7450bb0b91c9.jpg",
+      "source": "Skintastic Aesthetics",
+      "width": "1024px",
+      "height": "858px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/174b6a176f07.jpg",
+      "source": "Body Catalyst",
+      "width": "1600px",
+      "height": "1600px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6ef890bf3bc0.png",
+      "source": "Spherical Insights",
+      "width": "1536px",
+      "height": "1024px"
+    }
+  ],
+  "rhinoplasty": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b1b3678c279a.jpg",
+      "source": "YouTube",
+      "width": "1280px",
+      "height": "720px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b8b7385e46f3.jpg",
+      "source": "YouTube",
+      "width": "1280px",
+      "height": "720px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a708564bf2db.jpg",
+      "source": "Yelp",
+      "width": "1000px",
+      "height": "1000px"
+    }
+  ],
+  "hero-clinic": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/738367c5dbb1.jpg",
+      "source": "Pure Spa Direct",
+      "width": "1000px",
+      "height": "1000px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0c6a78ea5aba.jpg",
+      "source": "Kangmei",
+      "width": "1000px",
+      "height": "1000px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2fdf81dbd998.jpg",
+      "source": "Beauty Pro Supplies Canada",
+      "width": "1200px",
+      "height": "800px"
+    }
+  ],
+  "doctor-female-1": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bb045ccb98c7.jpeg",
+      "source": "www.weiserskin.com",
+      "width": "768px",
+      "height": "1024px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e79d27ccbeb6.png",
+      "source": "www.carencampbellmd.com",
+      "width": "1500px",
+      "height": "1875px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8b279617e5fb.jpg",
+      "source": "www.dermspecialistsdallas.com",
+      "width": "2500px",
+      "height": "2500px"
+    }
+  ],
+  "doctor-female-2": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5fcc7c92362e.jpg",
+      "source": "Yale School of Medicine - Yale University",
+      "width": "1200px",
+      "height": "800px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ca10b5f207ee.jpeg",
+      "source": "GoFundMe",
+      "width": "1200px",
+      "height": "900px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/130f282b1183.png",
+      "source": "H-Cura",
+      "width": "1080px",
+      "height": "1080px"
+    }
+  ],
+  "doctor-female-3": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/194d61599b40.jpg",
+      "source": "Alamy",
+      "width": "1300px",
+      "height": "956px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2fd94f355130.jpg",
+      "source": "Media.io",
+      "width": "928px",
+      "height": "1152px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/aa6c5014fb6a.jpg",
+      "source": "OnePeak Medical",
+      "width": "768px",
+      "height": "1024px"
+    }
+  ],
+  "doctor-male-1": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/da49d1350d3d.png",
+      "source": "drbravoplasticsurgery.com",
+      "width": "1309px",
+      "height": "1611px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c9285c94759d.jpg",
+      "source": "Travancore Medical College and",
+      "width": "874px",
+      "height": "1024px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e48b7e5e1df9.jpg",
+      "source": "www.memphisplasticsurgery.com",
+      "width": "2000px",
+      "height": "1200px"
+    }
+  ],
+  "doctor-female-4": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/19309ea2ea27.jpg",
+      "source": "Dreamstime",
+      "width": "1195px",
+      "height": "1690px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8c5753f097d8.jpeg",
+      "source": "The Refinery Skin Clinic",
+      "width": "1057px",
+      "height": "1138px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0758a6e1a585.png",
+      "source": "Cosmetic Skin & Laser Center",
+      "width": "1071px",
+      "height": "1280px"
+    }
+  ],
+  "gallery-laser-before": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cc11ddf042ea.jpg",
+      "source": "Medical News Today",
+      "width": "1100px",
+      "height": "734px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cfef40f3edeb.jpg",
+      "source": "DYU Aesthetics",
+      "width": "1000px",
+      "height": "865px"
+    }
+  ],
+  "gallery-laser-after": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1a9d84fff936.jpeg",
+      "source": "Reddit",
+      "width": "3024px",
+      "height": "4032px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3aedd2637e05.jpg",
+      "source": "V Square Clinic",
+      "width": "1000px",
+      "height": "860px"
+    }
+  ],
+  "gallery-botox-before": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ce01a3d471be.jpg",
+      "source": "Mabrie Facial Institute",
+      "width": "2340px",
+      "height": "902px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/035290ff8180.jpg",
+      "source": "VIVAA",
+      "width": "1024px",
+      "height": "1024px"
+    }
+  ],
+  "gallery-botox-after": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1d1238be060d.jpg",
+      "source": "Hush LA Medspa",
+      "width": "1000px",
+      "height": "1000px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/df92d9de8a0f.jpg",
+      "source": "Hush LA Medspa",
+      "width": "2240px",
+      "height": "1260px"
+    }
+  ],
+  "gallery-fillers-before": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bd11927a43ab.webp",
+      "source": "AER Skinlab",
+      "width": "1500px",
+      "height": "1010px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/51f5249d5e9b.jpg",
+      "source": "Dreamstime",
+      "width": "1600px",
+      "height": "648px"
+    }
+  ],
+  "gallery-fillers-after": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9511b61e9d23.jpg",
+      "source": "Green Relief Health",
+      "width": "1024px",
+      "height": "1024px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d7379e1bb13e.jpg",
+      "source": "Mabrie Facial Institute",
+      "width": "2340px",
+      "height": "1510px"
+    }
+  ],
+  "gallery-skin-before": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d5a4358d2986.jpg",
+      "source": "Black Skin Directory",
+      "width": "1500px",
+      "height": "1001px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1d03d81a2141.jpg",
+      "source": "Dermax Aesthetic",
+      "width": "3072px",
+      "height": "4096px"
+    }
+  ],
+  "gallery-skin-after": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d835a9c1915b.jpg",
+      "source": "www.womanandhome.com",
+      "width": "1920px",
+      "height": "1080px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2c4eac313d3a.png",
+      "source": "www.ourskindays.com",
+      "width": "1020px",
+      "height": "1052px"
+    }
+  ],
+  "gallery-body-before": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7d3862789b2f.jpg",
+      "source": "Body Catalyst",
+      "width": "1120px",
+      "height": "720px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f492cbe846e3.jpg",
+      "source": "Dr. Khorasani",
+      "width": "1280px",
+      "height": "640px"
+    }
+  ],
+  "gallery-body-after": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2f5cbe6984cc.jpg",
+      "source": "Dr John Burns",
+      "width": "1500px",
+      "height": "968px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/052d802fc13d.jpg",
+      "source": "Beauty Sculpting Room",
+      "width": "1440px",
+      "height": "700px"
+    }
+  ],
+  "gallery-nose-before": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3dfc1cf57a9a.webp",
+      "source": "Botonics",
+      "width": "1080px",
+      "height": "1079px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ecae894fd817.png",
+      "source": "KLNIK",
+      "width": "2494px",
+      "height": "2494px"
+    }
+  ],
+  "gallery-nose-after": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9f579a6f052c.png",
+      "source": "The Injection Room",
+      "width": "1080px",
+      "height": "1080px"
+    },
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/133bfd5096f8.jpg",
+      "source": "The Cosmetic Surgery Clinic",
+      "width": "2340px",
+      "height": "1754px"
+    }
+  ],
+  "avatar-amal": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d41971eaba15.jpg"
+    }
+  ],
+  "avatar-reem": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/56a1906d485a.jpg"
+    }
+  ],
+  "avatar-sarah": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a6cf651be003.jpg"
+    }
+  ],
+  "avatar-lama": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d455241a577c.jpg"
+    }
+  ],
+  "avatar-hind": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/232e61697a0c.jpg"
+    }
+  ],
+  "avatar-nada": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f605801438d9.jpg"
+    }
+  ],
+  "avatar-munira": [
+    {
+      "url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4b37d7bacc54.jpg"
+    }
+  ]
+}

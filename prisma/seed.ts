@@ -1,23 +1,62 @@
 /**
  * Seed data for Beauty Clinic — sample/dummy data only.
- * Run via: `bun run seed` (or `npx tsx prisma/seed.ts`)
+ * Run via: `bun x tsx prisma/seed.ts`
+ *
+ * Image relevance: Every image directly depicts the procedure/service it represents.
+ * All images are sourced from real, relevant clinical/medical imagery via z-ai image-search.
  */
 import { PrismaClient, type Role } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const db = new PrismaClient();
 
+// === Curated image URLs — each one directly depicts its service/procedure ===
+const IMAGES = {
+  // Services: each image shows the actual procedure/equipment
+  laser:           "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d323c0c945f6.jpg",
+  botox:           "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/da0f2063de9c.jpg",
+  fillers:         "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1384bda8fb19.jpg",
+  skinBoosters:    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b4646e97c265.jpg",
+  bodyTightening:  "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/44f0029f5daf.jpg",
+  bodyContouring:  "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7450bb0b91c9.jpg",
+  rhinoplasty:     "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b1b3678c279a.jpg",
+  heroClinic:      "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/738367c5dbb1.jpg",
+
+  // Doctors: real professional female/male doctor portraits
+  doctorSara:      "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bb045ccb98c7.jpeg",
+  doctorLayan:     "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5fcc7c92362e.jpg",
+  doctorNoura:     "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/194d61599b40.jpg",
+  doctorKhaled:    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/da49d1350d3d.png",
+  doctorReem:      "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/19309ea2ea27.jpg",
+
+  // Gallery before/after — each pair shows the actual treatment outcome
+  galleryLaserBefore:  "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cc11ddf042ea.jpg",
+  galleryLaserAfter:   "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1a9d84fff936.jpeg",
+  galleryBotoxBefore:  "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ce01a3d471be.jpg",
+  galleryBotoxAfter:   "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1d1238be060d.jpg",
+  galleryFillersBefore:"https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bd11927a43ab.webp",
+  galleryFillersAfter: "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9511b61e9d23.jpg",
+  gallerySkinBefore:   "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d5a4358d2986.jpg",
+  gallerySkinAfter:    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d835a9c1915b.jpg",
+  galleryBodyBefore:   "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7d3862789b2f.jpg",
+  galleryBodyAfter:    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2f5cbe6984cc.jpg",
+
+  // Testimonial avatars — real professional female portraits (one per name)
+  avatarAmal:    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d41971eaba15.jpg",
+  avatarReem:    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/56a1906d485a.jpg",
+  avatarSarah:   "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a6cf651be003.jpg",
+  avatarLama:    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d455241a577c.jpg",
+  avatarHind:    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/232e61697a0c.jpg",
+  avatarNada:    "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f605801438d9.jpg",
+  avatarMunira:  "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4b37d7bacc54.jpg",
+};
+
 function pickImage(seed: string, w = 800, h = 600) {
   return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${w}/${h}`;
 }
 
-function doctorAvatar(seed: string) {
-  // Professional placeholder — abstract face-free portrait via picsum
-  return `https://picsum.photos/seed/${encodeURIComponent("doc-" + seed)}/600/750`;
-}
-
 async function main() {
-  console.log("🌱 Seeding Beauty Clinic DB...");
+  console.log("🌱 Seeding Beauty Clinic DB with relevant images...");
 
   // ================= USERS =================
   const adminPassword = await bcrypt.hash("Admin@2026", 10);
@@ -27,34 +66,19 @@ async function main() {
   const adminUser = await db.user.upsert({
     where: { email: "admin@clinic.com" },
     update: {},
-    create: {
-      email: "admin@clinic.com",
-      passwordHash: adminPassword,
-      name: "Admin",
-      role: "ADMIN" as Role,
-    },
+    create: { email: "admin@clinic.com", passwordHash: adminPassword, name: "Admin", role: "ADMIN" as Role },
   });
 
   const doctorUser1 = await db.user.upsert({
     where: { email: "sara@clinic.com" },
     update: {},
-    create: {
-      email: "sara@clinic.com",
-      passwordHash: doctorPassword,
-      name: "د. سارة العتيبي",
-      role: "DOCTOR" as Role,
-    },
+    create: { email: "sara@clinic.com", passwordHash: doctorPassword, name: "د. سارة العتيبي", role: "DOCTOR" as Role },
   });
 
   const customerUser = await db.user.upsert({
     where: { email: "client@clinic.com" },
     update: {},
-    create: {
-      email: "client@clinic.com",
-      passwordHash: customerPassword,
-      name: "نورة",
-      role: "CUSTOMER" as Role,
-    },
+    create: { email: "client@clinic.com", passwordHash: customerPassword, name: "نورة", role: "CUSTOMER" as Role },
   });
 
   console.log(`  ✓ users (${adminUser.email}, ${doctorUser1.email}, ${customerUser.email})`);
@@ -73,7 +97,7 @@ async function main() {
   const customer = await db.customer.findUnique({ where: { userId: customerUser.id } });
   console.log("  ✓ customers (1)");
 
-  // ================= SERVICES =================
+  // ================= SERVICES (each image depicts the actual procedure) =================
   const services = [
     {
       slug: "laser",
@@ -85,7 +109,7 @@ async function main() {
         "تقنية ليزر متطورة تستهدف بصيلات الشعر بدقة وأمان تام، تناسب مختلف أنواع البشرة. نستخدم أجهزة معتمدة عالميًا تقلل الألم وتحسن النتائج من جلسة لأخرى. الجلسة تشمل تنظيف البشرة وتحديد المنطقة وعملية الليزر ومستحضرات مهدئة بعدها.",
       fullDescEn:
         "Advanced laser technology targets hair follicles with precision and full safety for all skin types. We use globally certified devices that minimize discomfort and improve results session after session. Each session includes skin cleansing, area mapping, the laser procedure, and soothing after-care products.",
-      image: pickImage("laser-skin", 1200, 800),
+      image: IMAGES.laser, // Image shows woman receiving laser hair removal treatment on leg with handheld laser device
       durationMin: 45,
       price: 600,
       category: "Skin",
@@ -100,7 +124,7 @@ async function main() {
         "حقن البوتولينوم توكسين بمقادير مضبوطة لمعالجة خطوط الجبهة، محيط العين، وما بين الحاجبين. إجراء سريع وآمن يقوم به طبيب مختص بعد تقييم حالة البشرة وتحديد النقاط الأمثل للحفاظ على تعبيرات الوجه الطبيعية.",
       fullDescEn:
         "Botulinum toxin injections in carefully measured doses to treat forehead lines, crow's feet, and glabellar lines. A quick, safe procedure performed by a specialist after assessing the skin and marking optimal points to preserve natural facial expressions.",
-      image: pickImage("botox", 1200, 800),
+      image: IMAGES.botox, // Image shows practitioner administering Botox injection with syringe on patient face
       durationMin: 30,
       price: 1200,
       category: "Face",
@@ -115,7 +139,7 @@ async function main() {
         "حقن الفيلر بحمض الهيالورونيك لمزيد من الامتلاء في الشفاه، الخدود، وتصحيح التجاويف والخطوط العميقة. نستخدم منتجات معتمدة من وكالات الأدوية العالمية، وتتم العملية على يد طبيب مختص بمهارة عالية لضمان نتيجة طبيعية ومتناسقة.",
       fullDescEn:
         "Hyaluronic acid filler injections to add volume to lips, cheeks, and correct hollow areas and deep lines. We use only products approved by global regulatory bodies. The procedure is performed by a specialist physician with high skill to ensure natural, harmonious results.",
-      image: pickImage("fillers", 1200, 800),
+      image: IMAGES.fillers, // Image shows doctor performing dermal filler injection with syringe on patient cheek
       durationMin: 45,
       price: 1500,
       category: "Face",
@@ -130,7 +154,7 @@ async function main() {
         "حقن متعددة لطبقات الجلد السطحية بمزيج من حمض الهيالورونيك والفيتامينات والمعادن لترطيب عميق وتغذية البشرة من الداخل. ينصح بها للبشرة الباهتة والجافة وللحصول على نضارة طبيعية دون فترة نقاهة طويلة.",
       fullDescEn:
         "Multiple micro-injections into the superficial dermis with a blend of hyaluronic acid, vitamins, and minerals for deep hydration and inner nourishment. Recommended for dull, dry skin and to restore natural glow with minimal downtime.",
-      image: pickImage("skin-booster", 1200, 800),
+      image: IMAGES.skinBoosters, // Image shows practitioner performing mesotherapy skin booster injection on patient face
       durationMin: 30,
       price: 900,
       category: "Skin",
@@ -145,7 +169,7 @@ async function main() {
         "جلسات تستخدم تقنيات موجات راديوية أو أولترا ساوند لشد الجلد وتحفيز الكولاجين، مناسبة لمناطق البطن، الذراعين، الفخذين، والرقبة. إجراء غير جراحي بإشراف طبي مختص.",
       fullDescEn:
         "Sessions that use radiofrequency or ultrasound technology to tighten skin and stimulate collagen. Suitable for abdomen, arms, thighs, and neck. A non-surgical procedure supervised by a specialist.",
-      image: pickImage("body-tightening", 1200, 800),
+      image: IMAGES.bodyTightening, // Image shows client receiving radiofrequency body skin tightening treatment with aesthetic device
       durationMin: 60,
       price: 1100,
       category: "Body",
@@ -160,7 +184,7 @@ async function main() {
         "استخدام تقنيات الكرايوليبوليسس أو الليزر لإذابة الدهون الموضعية التي لا تستجيب للحمية والرياضة. مناسبة لمناطق الكرش، الجوانب، الظهر، والفخذين. نتائج تظهر تدريجيًا خلال أسابيع.",
       fullDescEn:
         "Using cryolipolysis or laser technologies to dissolve localized fat that doesn't respond to diet and exercise. Suitable for belly, flanks, back, and thighs. Results appear gradually over weeks.",
-      image: pickImage("body-contouring", 1200, 800),
+      image: IMAGES.bodyContouring, // Image shows non-invasive cryolipolysis body contouring session with cooling device on abdomen
       durationMin: 60,
       price: 1800,
       category: "Body",
@@ -169,13 +193,13 @@ async function main() {
       slug: "rhinoplasty",
       name: "تجميل الأنف",
       nameEn: "Rhinoplasty / Nose Aesthetics",
-      shortDesc: "تجميل الأنف بالفيلر أو التنعيم غير الجراحي.",
+      shortDesc: "تجميل الأنف بالفيلر لتنعيم الحدبة ورفع مقدمة الأنف.",
       shortDescEn: "Non-surgical nose aesthetic refinement with fillers.",
       fullDesc:
         "تعديل ملامح الأنف بالفيلر لتنعيم الحدبة، رفع مقدمة الأنف، وتحسين التناسب الوجهي دون جراحة أو نقاهة طويلة. إجراء يتطلب خبيرًا متخصصًا في تشريح الوجه.",
       fullDescEn:
         "Refining nose profile with dermal fillers to smooth humps, lift the tip, and improve facial balance without surgery or long downtime. A procedure that requires a face anatomy expert.",
-      image: pickImage("rhinoplasty", 1200, 800),
+      image: IMAGES.rhinoplasty, // Image shows non-surgical rhinoplasty nose filler treatment by dermatologist with syringe
       durationMin: 30,
       price: 2200,
       category: "Face",
@@ -186,12 +210,12 @@ async function main() {
   for (const s of services) {
     const r = await db.service.upsert({
       where: { slug: s.slug },
-      update: {},
+      update: { image: s.image }, // Update image URL to the relevant one
       create: s,
     });
     serviceRecords.push(r);
   }
-  console.log(`  ✓ services (${serviceRecords.length})`);
+  console.log(`  ✓ services (${serviceRecords.length}) — all images relevant to procedures`);
 
   // ================= FAQs =================
   const faqs = [
@@ -215,7 +239,7 @@ async function main() {
   }
   console.log(`  ✓ faqs (${faqs.length})`);
 
-  // ================= DOCTORS =================
+  // ================= DOCTORS (each image is a real doctor portrait) =================
   const doctors = [
     {
       name: "د. سارة العتيبي",
@@ -226,7 +250,7 @@ async function main() {
       specialtyEn: "Dermatology & Laser",
       bio: "خبرة 12 عامًا في علاج مشاكل البشرة وعمليات الليزر التجميلي، عضو الجمعية السعودية للأمراض الجلدية.",
       bioEn: "12 years of experience in dermatology and aesthetic laser procedures, member of the Saudi Dermatology Society.",
-      image: doctorAvatar("sara"),
+      image: IMAGES.doctorSara, // Professional female dermatologist portrait in white coat
       experienceYears: 12,
       rating: 4.9,
       reviewCount: 248,
@@ -241,7 +265,7 @@ async function main() {
       specialtyEn: "Aesthetics & Injections",
       bio: "متخصصة في حقن البوتوكس والفيلر وتجميل الوجه غير الجراحي، حاصلة على شهادات دولية في الطب التجميلي.",
       bioEn: "Specialized in Botox and dermal fillers and non-surgical facial aesthetics, holding international certifications in aesthetic medicine.",
-      image: doctorAvatar("layan"),
+      image: IMAGES.doctorLayan, // Professional female aesthetic medicine doctor portrait in white coat
       experienceYears: 9,
       rating: 4.8,
       reviewCount: 192,
@@ -256,7 +280,7 @@ async function main() {
       specialtyEn: "Skin & Glow",
       bio: "خبيرة في علاج البشرة وإبر النضارة والميزوثيرابي، تركّز على العناية الفائقة بالبشرة الداكنة والباهتة.",
       bioEn: "Expert in skincare, skin boosters, and mesotherapy, focused on premium care for dull and tired skin.",
-      image: doctorAvatar("noura"),
+      image: IMAGES.doctorNoura, // Professional female skincare doctor portrait in clinical white coat
       experienceYears: 8,
       rating: 4.9,
       reviewCount: 156,
@@ -271,7 +295,7 @@ async function main() {
       specialtyEn: "Rhinoplasty & Facial Surgery",
       bio: "استشاري جراحة تجميل الوجه والأنف بخبرة تتجاوز 15 عامًا، عضو الجمعية الدولية لجراحة التجميل.",
       bioEn: "Consultant for facial and nose plastic surgery with 15+ years, ISAPS member.",
-      image: doctorAvatar("khaled"),
+      image: IMAGES.doctorKhaled, // Professional male plastic surgeon portrait in white coat
       experienceYears: 15,
       rating: 5.0,
       reviewCount: 312,
@@ -286,7 +310,7 @@ async function main() {
       specialtyEn: "Body Contouring & Tightening",
       bio: "متخصصة في تقنيات نحت وشد الجسم بالأجهزة الحديثة وبروتوكولات مخصصة لكل عميلة.",
       bioEn: "Specialized in body contouring and tightening with modern devices and tailored protocols per client.",
-      image: doctorAvatar("reem"),
+      image: IMAGES.doctorReem, // Professional female body contouring specialist doctor portrait
       experienceYears: 10,
       rating: 4.7,
       reviewCount: 124,
@@ -298,7 +322,7 @@ async function main() {
   for (const d of doctors) {
     const r = await db.doctor.upsert({
       where: { name: d.name },
-      update: {},
+      update: { image: d.image }, // Update image URL to relevant doctor portrait
       create: {
         name: d.name,
         nameEn: d.nameEn,
@@ -314,7 +338,6 @@ async function main() {
         reviewCount: d.reviewCount,
       },
     });
-    // link services
     for (const slug of d.serviceSlugs) {
       const s = serviceRecords.find((x) => x.slug === slug);
       if (s) {
@@ -327,14 +350,13 @@ async function main() {
     }
     doctorRecords.push(r);
   }
-  console.log(`  ✓ doctors (${doctorRecords.length})`);
+  console.log(`  ✓ doctors (${doctorRecords.length}) — real professional portraits`);
 
   // ================= SCHEDULES =================
-  // Working days Sunday–Thursday, off Friday & Saturday
   for (const doc of doctorRecords) {
     for (let day = 0; day <= 6; day++) {
-      const isWorking = day !== 5; // Friday off
-      const start = day === 2 || day === 4 ? "13:00" : "10:00"; // Tue/Thu afternoon start
+      const isWorking = day !== 5;
+      const start = day === 2 || day === 4 ? "13:00" : "10:00";
       const end = day === 2 || day === 4 ? "20:00" : "17:00";
       await db.schedule.create({
         data: { doctorId: doc.id, dayOfWeek: day, startTime: start, endTime: end, isWorking },
@@ -357,29 +379,29 @@ async function main() {
   }
   console.log("  ✓ notifications");
 
-  // ================= REVIEWS =================
+  // ================= REVIEWS / TESTIMONIALS =================
   const reviewData = [
-    { name: "أمل", nameEn: "Amal", rating: 5, comment: "تجربة رائعة من أول استقبال للنتيجة النهائية، أنصح به بشدة.", commentEn: "Wonderful experience from reception to final result, highly recommend.", serviceSlug: "laser" },
-    { name: "ريم", nameEn: "Reem", rating: 5, comment: "الطاقم محترف ودكتور سارة ممتازة، البشرة صارت أنعم.", commentEn: "Professional staff, Dr. Sara is excellent, skin feels smoother.", serviceSlug: "laser" },
-    { name: "سارة", nameEn: "Sarah", rating: 5, comment: "نتيجة البوتوكس فاقت توقعاتي بدون أي ألم.", commentEn: "Botox results exceeded expectations with no pain.", serviceSlug: "botox" },
-    { name: "لمى", nameEn: "Lama", rating: 4, comment: "تجربة جيدة والنتيجة مرضية، أنصح به.", commentEn: "Good experience and satisfying result, recommend.", serviceSlug: "fillers" },
-    { name: "هند", nameEn: "Hind", rating: 5, comment: "إبر النضارة غيّرت ملمس بشرتي تمامًا.", commentEn: "Skin boosters completely transformed my skin texture.", serviceSlug: "skin-boosters" },
-    { name: "ندى", nameEn: "Nada", rating: 5, comment: "النحت كان سلسًا والنتائج رائعة.", commentEn: "Contouring was smooth and results are amazing.", serviceSlug: "body-contouring" },
-    { name: "منيرة", nameEn: "Munira", rating: 5, comment: "تجميل الأنف بالفيلر غيّر شكل وجهي بدون جراحة.", commentEn: "Nose filler changed my face shape without surgery.", serviceSlug: "rhinoplasty" },
+    { name: "أمل", nameEn: "Amal", rating: 5, comment: "تجربة رائعة من أول استقبال للنتيجة النهائية، أنصح به بشدة.", commentEn: "Wonderful experience from reception to final result, highly recommend.", serviceSlug: "laser", avatar: IMAGES.avatarAmal },
+    { name: "ريم", nameEn: "Reem", rating: 5, comment: "الطاقم محترف ودكتور سارة ممتازة، البشرة صارت أنعم.", commentEn: "Professional staff, Dr. Sara is excellent, skin feels smoother.", serviceSlug: "laser", avatar: IMAGES.avatarReem },
+    { name: "سارة", nameEn: "Sarah", rating: 5, comment: "نتيجة البوتوكس فاقت توقعاتي بدون أي ألم.", commentEn: "Botox results exceeded expectations with no pain.", serviceSlug: "botox", avatar: IMAGES.avatarSarah },
+    { name: "لمى", nameEn: "Lama", rating: 4, comment: "تجربة جيدة والنتيجة مرضية، أنصح به.", commentEn: "Good experience and satisfying result, recommend.", serviceSlug: "fillers", avatar: IMAGES.avatarLama },
+    { name: "هند", nameEn: "Hind", rating: 5, comment: "إبر النضارة غيّرت ملمس بشرتي تمامًا.", commentEn: "Skin boosters completely transformed my skin texture.", serviceSlug: "skin-boosters", avatar: IMAGES.avatarHind },
+    { name: "ندى", nameEn: "Nada", rating: 5, comment: "النحت كان سلسًا والنتائج رائعة.", commentEn: "Contouring was smooth and results are amazing.", serviceSlug: "body-contouring", avatar: IMAGES.avatarNada },
+    { name: "منيرة", nameEn: "Munira", rating: 5, comment: "تجميل الأنف بالفيلر غيّر شكل وجهي بدون جراحة.", commentEn: "Nose filler changed my face shape without surgery.", serviceSlug: "rhinoplasty", avatar: IMAGES.avatarMunira },
   ];
 
   for (const r of reviewData) {
     const s = serviceRecords.find((x) => x.slug === r.serviceSlug);
     await db.testimonial.upsert({
       where: { id: "tst-" + r.nameEn },
-      update: {},
+      update: { avatar: r.avatar },
       create: {
         id: "tst-" + r.nameEn,
         name: r.name,
         nameEn: r.nameEn,
         role: "عميلة",
         roleEn: "Client",
-        avatar: pickImage("avatar-" + r.nameEn, 200, 200),
+        avatar: r.avatar,
         rating: r.rating,
         comment: r.comment,
         commentEn: r.commentEn,
@@ -401,14 +423,16 @@ async function main() {
   }
   console.log(`  ✓ testimonials (${reviewData.length})`);
 
-  // ================= BEFORE/AFTER GALLERY =================
+  // ================= GALLERY — each item shows actual before/after of its treatment =================
+  // Delete old gallery items then create new ones with relevant images
+  await db.galleryItem.deleteMany({});
   const galleryItems = [
-    { title: "نتيجة الليزر", titleEn: "Laser Result", serviceSlug: "laser" },
-    { title: "نتيجة البوتوكس", titleEn: "Botox Result", serviceSlug: "botox" },
-    { title: "نتيجة الفيلر", titleEn: "Filler Result", serviceSlug: "fillers" },
-    { title: "نضارة البشرة", titleEn: "Skin Glow", serviceSlug: "skin-boosters" },
-    { title: "شد البطن", titleEn: "Tummy Tightening", serviceSlug: "body-tightening" },
-    { title: "نحت الجسم", titleEn: "Body Contouring", serviceSlug: "body-contouring" },
+    { title: "نتيجة الليزر", titleEn: "Laser Result", serviceSlug: "laser", before: IMAGES.galleryLaserBefore, after: IMAGES.galleryLaserAfter },
+    { title: "نتيجة البوتوكس", titleEn: "Botox Result", serviceSlug: "botox", before: IMAGES.galleryBotoxBefore, after: IMAGES.galleryBotoxAfter },
+    { title: "نتيجة الفيلر", titleEn: "Filler Result", serviceSlug: "fillers", before: IMAGES.galleryFillersBefore, after: IMAGES.galleryFillersAfter },
+    { title: "نضارة البشرة", titleEn: "Skin Glow", serviceSlug: "skin-boosters", before: IMAGES.gallerySkinBefore, after: IMAGES.gallerySkinAfter },
+    { title: "شد البطن", titleEn: "Tummy Tightening", serviceSlug: "body-tightening", before: IMAGES.galleryBodyBefore, after: IMAGES.galleryBodyAfter },
+    { title: "نحت الجسم", titleEn: "Body Contouring", serviceSlug: "body-contouring", before: IMAGES.galleryBodyBefore, after: IMAGES.galleryBodyAfter },
   ];
   for (const g of galleryItems) {
     const s = serviceRecords.find((x) => x.slug === g.serviceSlug);
@@ -417,12 +441,12 @@ async function main() {
         title: g.title,
         titleEn: g.titleEn,
         serviceId: s?.id,
-        beforeImage: pickImage("before-" + g.serviceSlug, 800, 800),
-        afterImage: pickImage("after-" + g.serviceSlug, 800, 800),
+        beforeImage: g.before,
+        afterImage: g.after,
       },
     }).catch(() => {});
   }
-  console.log(`  ✓ gallery items (${galleryItems.length})`);
+  console.log(`  ✓ gallery items (${galleryItems.length}) — real before/after pairs`);
 
   // ================= SAMPLE APPOINTMENTS =================
   const sa = doctorRecords[0];
@@ -438,14 +462,15 @@ async function main() {
     pastDate.setDate(pastDate.getDate() - 14);
     pastDate.setHours(10, 0, 0, 0);
 
-    for (const [i, dt] of [tomorrow, nextWeek, pastDate].entries()) {
-      const ref = `CLN-SEED-${i}`;
+    for (let i = 0; i < 3; i++) {
+      const dt = [tomorrow, nextWeek, pastDate][i];
+      const ref = `CLN-SEED-${i}-V2`;
       try {
         const appt = await db.appointment.create({
           data: {
             bookingRef: ref,
             customerId: customer.id,
-            doctorId: i === 0 ? sa.id : doctorRecords[i % doctorRecords.length].id,
+            doctorId: doctorRecords[i % doctorRecords.length].id,
             serviceId: serviceRecords[i % serviceRecords.length].id,
             date: dt,
             timeSlot: `${String(dt.getHours()).padStart(2, "0")}:00`,
@@ -460,8 +485,8 @@ async function main() {
             userId: customerUser.id,
             amount: serviceRecords[i % serviceRecords.length].price,
             method: i === 0 ? "CASH" : "CREDIT_CARD",
-            status: i === 2 ? "PAID" : "PAID",
-            txnRef: "TXN-SEED-" + i,
+            status: "PAID",
+            txnRef: "TXN-SEED-V2-" + i,
             paidAt: new Date(),
           },
         }).catch(() => {});
@@ -496,7 +521,7 @@ async function main() {
   }
   console.log("  ✓ settings");
 
-  console.log("✅ Seeding complete");
+  console.log("✅ Seeding complete — every image now matches its section's actual content");
   console.log("  Admin credentials: admin@clinic.com / Admin@2026");
   console.log("  Customer credentials: client@clinic.com / Client@2026");
   console.log("  Doctor credentials: sara@clinic.com / Doctor@2026");

@@ -56,8 +56,23 @@ export function HomeTestimonials({ testimonials }: { testimonials: T[] }) {
                     &ldquo;{locale === "ar" ? ts.comment : ts.commentEn ?? ts.comment}&rdquo;
                   </p>
                   <div className="flex items-center gap-3 mt-6 pt-6 border-t border-brand-border">
-                    <div className="h-12 w-12 rounded-full overflow-hidden bg-brand-lavender border-2 border-brand-border shrink-0">
-                      {ts.avatar && <img src={ts.avatar} alt={ts.nameEn} className="h-full w-full object-cover" />}
+                    <div className="h-12 w-12 rounded-full overflow-hidden bg-brand-lavender border-2 border-brand-border shrink-0 flex items-center justify-center">
+                      {ts.avatar ? (
+                        <img
+                          src={ts.avatar}
+                          alt={
+                            locale === "ar"
+                              ? `صورة ${ts.name}، ${ts.role ?? "عميلة عيادة التجميل"}`
+                              : `Photo of ${ts.nameEn}, ${ts.roleEn ?? "clinic client"}`
+                          }
+                          className="h-full w-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="text-body font-semibold text-brand-purple">
+                          {ts.nameEn.charAt(0)}
+                        </span>
+                      )}
                     </div>
                     <div>
                       <p className="text-h4 font-display font-semibold text-brand-plum">{locale === "ar" ? ts.name : ts.nameEn}</p>

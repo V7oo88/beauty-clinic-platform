@@ -56,7 +56,18 @@ export function ServiceDetailClient({ service, doctors }: { service: Service; do
             animate={{ opacity: 1, x: 0 }}
             className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-luxury"
           >
-            <img src={service.image} alt={locale === "ar" ? service.name : service.nameEn} className="h-full w-full object-cover" />
+            <img
+              src={service.image}
+              alt={
+                locale === "ar"
+                  ? `صورة توضيحية لإجراء ${service.name}: ${service.shortDesc}`
+                  : `Illustration of ${service.nameEn} procedure: ${service.shortDescEn}`
+              }
+              className="h-full w-full object-cover"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = `https://picsum.photos/seed/${service.slug}/1200/800`;
+              }}
+            />
             {service.category && (
               <span className="absolute top-4 start-4 text-[10px] uppercase tracking-widest bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full">
                 {service.category}

@@ -46,7 +46,18 @@ export function DoctorDetailClient({ doctor }: { doctor: Doctor }) {
             animate={{ opacity: 1, y: 0 }}
             className="aspect-[4/5] rounded-3xl overflow-hidden shadow-luxury mx-auto lg:mx-0 w-full max-w-sm"
           >
-            <img src={doctor.image} alt={doctor.name} className="h-full w-full object-cover" />
+            <img
+              src={doctor.image}
+              alt={
+                locale === "ar"
+                  ? `صورة ${doctor.name} — ${doctor.title}، ${doctor.specialty}`
+                  : `Portrait photo of ${doctor.nameEn} — ${doctor.titleEn}, ${doctor.specialtyEn}`
+              }
+              className="h-full w-full object-cover"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = `https://picsum.photos/seed/doc-${doctor.id}/600/750`;
+              }}
+            />
           </motion.div>
 
           {/* Info */}
