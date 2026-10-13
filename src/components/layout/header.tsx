@@ -69,18 +69,18 @@ export function Header() {
     >
       <div className="container mx-auto flex h-16 lg:h-20 items-center justify-between gap-4 px-4">
         {/* Logo */}
-        <Link href={`/${locale}`} className="flex items-center gap-2 group">
+        <Link href={`/${locale}`} className="flex items-center gap-3 group">
           <div className="relative">
-            <div className="absolute inset-0 rounded-full bg-accent/30 blur-md group-hover:bg-accent/50 transition" />
-            <div className="relative h-9 w-9 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center">
-              <Sparkles className="h-4 w-4 text-background" />
+            <div className="absolute inset-0 rounded-full bg-brand-lavender/60 blur-md group-hover:bg-brand-lavender transition" />
+            <div className="relative h-11 w-11 rounded-2xl purple-gradient flex items-center justify-center shadow-purple">
+              <Sparkles className="h-5 w-5 text-white" />
             </div>
           </div>
           <div className="flex flex-col leading-none">
-            <span className="font-display text-lg font-semibold tracking-tight">
+            <span className="text-h3 font-display font-bold tracking-tight text-brand-purple">
               {locale === "ar" ? "جمال" : "Beauty"}
             </span>
-            <span className="text-[10px] text-muted-foreground uppercase tracking-widest">
+            <span className="text-overline text-brand-secondary">
               {locale === "ar" ? "عيادة التجميل" : "Aesthetic Clinic"}
             </span>
           </div>
@@ -93,8 +93,8 @@ export function Header() {
               key={l.href}
               href={`/${locale}${l.href === "/" ? "" : l.href}`}
               className={cn(
-                "px-3 py-2 rounded-full text-sm font-medium transition-all hover:bg-accent/20",
-                isActive(l.href) ? "text-accent-foreground bg-accent/30" : "text-foreground/80"
+                "px-4 py-2 rounded-full text-body font-medium transition-all hover:bg-brand-lavender/40",
+                isActive(l.href) ? "text-brand-purple bg-brand-lavender/60 font-semibold" : "text-foreground/80"
               )}
             >
               {l.label}

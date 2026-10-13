@@ -22,45 +22,46 @@ export function HomeTestimonials({ testimonials }: { testimonials: T[] }) {
   const locale = useLocale();
 
   return (
-    <section className="py-16 lg:py-24">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center text-center mb-10">
-          <span className="text-xs uppercase tracking-widest text-accent font-semibold mb-3">
+    <section className="py-20 lg:py-28 bg-brand-cream relative">
+      <div className="absolute inset-0 pattern-dots opacity-25" />
+      <div className="container mx-auto px-4 relative">
+        <div className="flex flex-col items-center text-center mb-14">
+          <span className="text-overline text-brand-purple font-semibold mb-4">
             {locale === "ar" ? "آراء" : "Testimonials"}
           </span>
-          <h2 className="font-display text-3xl lg:text-4xl font-semibold tracking-tight text-balance max-w-2xl">
+          <h2 className="text-h1 max-w-3xl text-balance text-brand-plum">
             {t("testimonialsTitle")}
           </h2>
-          <p className="text-muted-foreground mt-3 max-w-xl text-balance">{t("testimonialsSubtitle")}</p>
+          <p className="text-body-lg text-brand-secondary mt-4 max-w-2xl text-pretty">{t("testimonialsSubtitle")}</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {testimonials.map((ts, i) => (
             <motion.div
               key={ts.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
             >
-              <Card className="h-full border-border/60 bg-card p-6 relative">
-                <Quote className="absolute top-4 end-4 h-6 w-6 text-accent/30" />
+              <Card className="h-full border-brand bg-white p-7 relative hover:shadow-luxury transition-all rounded-2xl">
+                <Quote className="absolute top-5 end-5 h-10 w-10 text-brand-lavender" />
                 <CardContent className="p-0 flex flex-col h-full">
-                  <div className="flex items-center gap-1 mb-3">
+                  <div className="flex items-center gap-1 mb-4">
                     {Array.from({ length: ts.rating }).map((_, idx) => (
-                      <Star key={idx} className="h-3.5 w-3.5 fill-accent text-accent" />
+                      <Star key={idx} className="h-4 w-4 fill-brand-purple text-brand-purple" />
                     ))}
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed flex-1 italic">
+                  <p className="text-body text-brand-secondary leading-relaxed flex-1 italic">
                     &ldquo;{locale === "ar" ? ts.comment : ts.commentEn ?? ts.comment}&rdquo;
                   </p>
-                  <div className="flex items-center gap-3 mt-4 pt-4 border-t border-border">
-                    <div className="h-10 w-10 rounded-full overflow-hidden bg-accent/20">
+                  <div className="flex items-center gap-3 mt-6 pt-6 border-t border-brand-border">
+                    <div className="h-12 w-12 rounded-full overflow-hidden bg-brand-lavender border-2 border-brand-border shrink-0">
                       {ts.avatar && <img src={ts.avatar} alt={ts.nameEn} className="h-full w-full object-cover" />}
                     </div>
                     <div>
-                      <p className="font-semibold text-sm">{locale === "ar" ? ts.name : ts.nameEn}</p>
-                      <p className="text-[11px] text-muted-foreground">{locale === "ar" ? ts.role : ts.roleEn ?? ts.role}</p>
+                      <p className="text-h4 font-display font-semibold text-brand-plum">{locale === "ar" ? ts.name : ts.nameEn}</p>
+                      <p className="text-caption text-brand-secondary mt-0.5">{locale === "ar" ? ts.role : ts.roleEn ?? ts.role}</p>
                     </div>
                   </div>
                 </CardContent>

@@ -20,53 +20,53 @@ export function HomeGallery({ items }: { items: GalleryItem[] }) {
   const locale = useLocale();
 
   return (
-    <section className="py-16 lg:py-24 bg-secondary/40">
+    <section className="py-20 lg:py-28">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center text-center mb-10">
-          <span className="text-xs uppercase tracking-widest text-accent font-semibold mb-3">
+        <div className="flex flex-col items-center text-center mb-14">
+          <span className="text-overline text-brand-purple font-semibold mb-4">
             {locale === "ar" ? "نتائج" : "Results"}
           </span>
-          <h2 className="font-display text-3xl lg:text-4xl font-semibold tracking-tight text-balance max-w-2xl">
+          <h2 className="text-h1 max-w-3xl text-balance text-brand-plum">
             {t("galleryTitle")}
           </h2>
-          <p className="text-muted-foreground mt-3 max-w-xl text-balance">{t("gallerySubtitle")}</p>
+          <p className="text-body-lg text-brand-secondary mt-4 max-w-2xl text-pretty">{t("gallerySubtitle")}</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {items.map((it, i) => (
             <motion.div
               key={it.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="rounded-2xl overflow-hidden border border-border/60 bg-card shadow-soft"
+              className="group rounded-3xl overflow-hidden border border-brand bg-white shadow-soft hover:shadow-luxury transition-all"
             >
-              <div className="grid grid-cols-2 gap-1">
+              <div className="grid grid-cols-2 gap-1 bg-brand-plum/10">
                 <div className="aspect-[3/4] relative overflow-hidden">
-                  <img src={it.beforeImage} alt={`Before - ${it.title}`} className="h-full w-full object-cover" loading="lazy" />
-                  <span className="absolute top-2 start-2 px-2 py-1 text-[10px] uppercase tracking-widest bg-background/80 backdrop-blur-sm rounded-full">
+                  <img src={it.beforeImage} alt={`Before - ${it.title}`} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <span className="absolute top-3 start-3 px-3 py-1.5 text-caption font-bold uppercase tracking-widest bg-white/90 backdrop-blur-sm rounded-full border border-brand-border text-brand-secondary">
                     {locale === "ar" ? "قبل" : "Before"}
                   </span>
                 </div>
                 <div className="aspect-[3/4] relative overflow-hidden">
-                  <img src={it.afterImage} alt={`After - ${it.title}`} className="h-full w-full object-cover" loading="lazy" />
-                  <span className="absolute top-2 start-2 px-2 py-1 text-[10px] uppercase tracking-widest bg-accent text-accent-foreground rounded-full">
+                  <img src={it.afterImage} alt={`After - ${it.title}`} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  <span className="absolute top-3 start-3 px-3 py-1.5 text-caption font-bold uppercase tracking-widest bg-brand-purple text-white rounded-full shadow-purple">
                     {locale === "ar" ? "بعد" : "After"}
                   </span>
                 </div>
               </div>
-              <div className="p-4 text-center">
-                <p className="font-display text-sm font-semibold">{locale === "ar" ? it.title : it.titleEn}</p>
+              <div className="p-5 text-center">
+                <p className="text-h4 font-display font-semibold text-brand-plum">{locale === "ar" ? it.title : it.titleEn}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
-        <div className="max-w-3xl mx-auto mt-8">
-          <Alert className="bg-accent/10 border-accent/30 rounded-xl">
-            <Info className="h-4 w-4 text-accent" />
-            <AlertDescription className="text-xs text-muted-foreground">
+        <div className="max-w-3xl mx-auto mt-10">
+          <Alert className="bg-brand-lavender/40 border-brand-border rounded-2xl">
+            <Info className="h-5 w-5 text-brand-purple" />
+            <AlertDescription className="text-body-sm text-brand-secondary">
               {locale === "ar"
                 ? "هذه صور تجريبية لأغراض العرض فقط ولا تمثّل حالات حقيقية."
                 : "These are sample images for demonstration only and do not represent real cases."}
